@@ -11,13 +11,14 @@ func Tag(name, attrs string, children ...Dom) Dom {
 }
 
 func (dom *tag) HtmlSafe() string {
-	final := ""
+	final := "\n"
 
 	for _, el := range dom.children {
-		final += el.HtmlSafe()
+		final += el.HtmlSafe() + "\n"
 	}
+
 	if dom.attrs == "" {
-		return "<" + dom.name + ">" + final + "</" + dom.name + ">"
+		return "\n<" + dom.name + ">" + final + "</" + dom.name + ">"
 	}
-	return "<" + dom.name + " " + dom.attrs + ">" + final + "</" + dom.name + ">"
+	return "\n<" + dom.name + " " + dom.attrs + ">" + final + "</" + dom.name + ">"
 }

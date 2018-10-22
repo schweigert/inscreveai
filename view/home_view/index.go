@@ -5,7 +5,7 @@ import (
 	"github.com/schweigert/inscreveai/view/layouts"
 )
 
-func Index() string {
+func Index() []byte {
 	return layouts.Application(
 
 		func() html.Dom {
