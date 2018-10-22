@@ -1,4 +1,4 @@
-package credentials
+package login
 
 import (
 	"encoding/json"
@@ -12,12 +12,6 @@ import (
 type GoogleCredentials struct {
 	Cid     string `json:"cid"`
 	Csecret string `json:"csecret"`
-}
-
-var GoogleConfig *oauth2.Config
-
-func init() {
-	GoogleConfig = GoogleOAuth2Config()
 }
 
 func ReadGoogleCredentials() GoogleCredentials {
@@ -45,4 +39,8 @@ func GoogleOAuth2Config() *oauth2.Config {
 	}
 
 	return config
+}
+
+func GoogleLoginURL(state string) string {
+	return GoogleConfig.AuthCodeURL(state)
 }

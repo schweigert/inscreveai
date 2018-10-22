@@ -9,8 +9,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - TZ=GMT
-    ports:
-      - 5432
   web:
     build: .
     command: web
+    ports:
+      - 3000:3000
