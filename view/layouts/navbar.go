@@ -1,8 +1,22 @@
 package layouts
 
-import "github.com/schweigert/inscreveai/view/html"
+import (
+	"github.com/gin-gonic/contrib/sessions"
+	"github.com/gin-gonic/gin"
+	"github.com/schweigert/inscreveai/login"
+	"github.com/schweigert/inscreveai/view/html"
+)
 
-func Navbar(yield func() html.Dom) []byte {
+func googleOAuthState(c *gin.Context) string {
+	state := login.RandToken()
+	session := sessions.Default(c)
+	session.Set("state", state)
+	session.Save()
+
+	return state
+}
+
+func Navbar(c *gin.Context, yield func() html.Dom) []byte {
 	return Application(
 		func() html.Dom {
 			return html.DivTag(
@@ -29,8 +43,8 @@ func Navbar(yield func() html.Dom) []byte {
 							`class="btn btn-outline-white my-sm-0" type="submit"`,
 							html.ITag(`class="fas fa-search"`),
 						),
-						html.ButtonTag(
-							`class="btn btn-outline-warning ml-2 my-sm-0"`,
+						html.ATag(
+							`class="btn btn-outline-warning ml-2 my-sm-0" href="`+login.GoogleLoginURL(googleOAuthState(c))+`"`,
 							html.ITag(`class="fab fa-google"`),
 						),
 					),
