@@ -15,6 +15,7 @@ func Navbar(yield func() html.Dom) []byte {
 							`class="nav-item active"`,
 							html.ATag(
 								`class="navbar-brand" href="/"`,
+								html.ITag(`class="far fa-bookmark fa-lg"`),
 								html.Text("Inscreve.ai"),
 							),
 						),
@@ -25,8 +26,12 @@ func Navbar(yield func() html.Dom) []byte {
 							`class="form-control mr-sm-2" type="search" placeholder="Busca" aria-label="Busca" name="query"`,
 						),
 						html.ButtonTag(
-							`class="btn btn-outline-white my-2 my-sm-0" type="submit"`,
+							`class="btn btn-outline-white my-sm-0" type="submit"`,
 							html.ITag(`class="fas fa-search"`),
+						),
+						html.ButtonTag(
+							`class="btn btn-outline-warning ml-2 my-sm-0"`,
+							html.ITag(`class="fab fa-google"`),
 						),
 					),
 				),
