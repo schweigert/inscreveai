@@ -13,6 +13,7 @@ func Application(yield func() html.Dom) []byte {
 					html.Text("InscreveAi"),
 				),
 				html.Text(`<link rel="stylesheet" href="./public/css/bootstrap.css">`),
+				html.Text(`<link rel="stylesheet" href="./public/css/application.css">`),
 			),
 			html.BodyTag(
 				"",

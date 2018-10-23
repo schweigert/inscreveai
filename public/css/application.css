@@ -1,0 +1,11 @@
+body {
+  margin: 0;
+  background: url('../img/background.jpg');
+  background-size: 100%;
+  background-repeat:no-repeat;
+  display: compact;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

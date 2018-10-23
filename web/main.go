@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
+	"github.com/schweigert/inscreveai/controllers/event_controller"
 	"github.com/schweigert/inscreveai/controllers/home_controller"
 	"github.com/schweigert/inscreveai/model"
 )
@@ -11,7 +12,10 @@ func migrate() {
 	db := model.Db()
 	defer db.Close()
 
-	db.AutoMigrate(&model.UserInfo{})
+	db.AutoMigrate(
+		&model.UserInfo{},
+		&model.Event{},
+	)
 }
 
 func main() {
@@ -24,6 +28,7 @@ func main() {
 
 	r.GET("/", home_controller.IndexHandler)
 	r.GET("/auth", home_controller.AuthHandler)
+	r.POST("/event", event_controller.CreateHandler)
 
 	r.Run("0.0.0.0:3000")
 }

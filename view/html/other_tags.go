@@ -52,6 +52,10 @@ func FormTag(attrs string, children ...Dom) Dom {
 	return Tag("form", attrs, children...)
 }
 
+func LabelTag(attrs string, children ...Dom) Dom {
+	return Tag("label", attrs, children...)
+}
+
 func SpanTag(attrs string, children ...Dom) Dom {
 	return Tag("span", attrs, children...)
 }

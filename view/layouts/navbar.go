@@ -1,21 +1,11 @@
 package layouts
 
 import (
-	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
-	"github.com/schweigert/inscreveai/login"
 	"github.com/schweigert/inscreveai/model"
+	"github.com/schweigert/inscreveai/view/helpers"
 	"github.com/schweigert/inscreveai/view/html"
 )
-
-func googleOAuthState(c *gin.Context) string {
-	state := login.RandToken()
-	session := sessions.Default(c)
-	session.Set("state", state)
-	session.Save()
-
-	return state
-}
 
 func Navbar(isAuth bool, currentUser *model.UserInfo, c *gin.Context, yield func() html.Dom) []byte {
 	return Application(
@@ -44,19 +34,7 @@ func Navbar(isAuth bool, currentUser *model.UserInfo, c *gin.Context, yield func
 							`class="btn btn-outline-white my-sm-0" type="submit"`,
 							html.ITag(`class="fas fa-search"`),
 						),
-						html.If(
-							isAuth,
-							html.ATag(
-								`class="btn btn-outline-warning ml-2 my-sm-0" href="`+login.GoogleLoginURL(googleOAuthState(c))+`"`,
-								html.ITag(`class="fab fa-google"`),
-								html.Text(currentUser.Name),
-							),
-							html.ATag(
-								`class="btn btn-outline-warning ml-2 my-sm-0" href="`+login.GoogleLoginURL(googleOAuthState(c))+`"`,
-								html.ITag(`class="fab fa-google"`),
-								html.Text("Entrar"),
-							),
-						),
+						helpers.AuthButton(isAuth, currentUser, c),
 					),
 				),
 				yield(),
