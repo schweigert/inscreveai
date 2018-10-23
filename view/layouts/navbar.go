@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/schweigert/inscreveai/login"
+	"github.com/schweigert/inscreveai/model"
 	"github.com/schweigert/inscreveai/view/html"
 )
 
@@ -16,7 +17,7 @@ func googleOAuthState(c *gin.Context) string {
 	return state
 }
 
-func Navbar(c *gin.Context, yield func() html.Dom) []byte {
+func Navbar(isAuth bool, currentUser *model.UserInfo, c *gin.Context, yield func() html.Dom) []byte {
 	return Application(
 		func() html.Dom {
 			return html.DivTag(
@@ -43,9 +44,18 @@ func Navbar(c *gin.Context, yield func() html.Dom) []byte {
 							`class="btn btn-outline-white my-sm-0" type="submit"`,
 							html.ITag(`class="fas fa-search"`),
 						),
-						html.ATag(
-							`class="btn btn-outline-warning ml-2 my-sm-0" href="`+login.GoogleLoginURL(googleOAuthState(c))+`"`,
-							html.ITag(`class="fab fa-google"`),
+						html.If(
+							isAuth,
+							html.ATag(
+								`class="btn btn-outline-warning ml-2 my-sm-0" href="`+login.GoogleLoginURL(googleOAuthState(c))+`"`,
+								html.ITag(`class="fab fa-google"`),
+								html.Text(currentUser.Name),
+							),
+							html.ATag(
+								`class="btn btn-outline-warning ml-2 my-sm-0" href="`+login.GoogleLoginURL(googleOAuthState(c))+`"`,
+								html.ITag(`class="fab fa-google"`),
+								html.Text("Entrar"),
+							),
 						),
 					),
 				),

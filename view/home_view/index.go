@@ -7,18 +7,13 @@ import (
 	"github.com/schweigert/inscreveai/view/layouts"
 )
 
-func Index(c *gin.Context) []byte {
-	user := model.UserInfoFromSession(c)
-	name := "Sem nome"
-	if user != nil {
-		name = user.Name
-	}
+func Index(isAuth bool, currentUser *model.UserInfo, c *gin.Context) []byte {
 	return layouts.Navbar(
-		c,
+		isAuth, currentUser, c,
 		func() html.Dom {
 			return html.DivTag(
 				"",
-				html.Text(name),
+				html.Text(currentUser.Name),
 			)
 		},
 	)

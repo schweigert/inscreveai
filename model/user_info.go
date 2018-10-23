@@ -78,7 +78,7 @@ func UserInfoFromSession(c *gin.Context) *UserInfo {
 		}
 	}
 
-	return nil
+	return &UserInfo{Email: "sem.email@email.com", EmailVerified: false, Name: "Sem Nome"}
 }
 
 func UserInfoFromJson(data []byte) *UserInfo {
