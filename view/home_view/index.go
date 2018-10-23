@@ -6,8 +6,7 @@ import (
 )
 
 func Index() []byte {
-	return layouts.Application(
-
+	return layouts.Navbar(
 		func() html.Dom {
 			return html.DivTag(
 				"",

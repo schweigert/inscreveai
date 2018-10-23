@@ -22,6 +22,7 @@ func Application(yield func() html.Dom) []byte {
 					html.ScriptTag(`src="./public/js/jquery.js"`),
 					html.ScriptTag(`src="./public/js/popper.js"`),
 					html.ScriptTag(`src="./public/js/bootstrap.js"`),
+					html.ScriptTag(`src="./public/js/fontawesome.js"`),
 				),
 			),
 		),

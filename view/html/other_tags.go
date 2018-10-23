@@ -28,6 +28,10 @@ func DivTag(attrs string, children ...Dom) Dom {
 	return Tag("div", attrs, children...)
 }
 
+func NavTag(attrs string, children ...Dom) Dom {
+	return Tag("nav", attrs, children...)
+}
+
 func MainTag(attrs string, children ...Dom) Dom {
 	return Tag("div", attrs, children...)
 }
@@ -42,4 +46,28 @@ func ScriptTag(attrs string, children ...Dom) Dom {
 
 func FooterTag(attrs string, children ...Dom) Dom {
 	return Tag("footer", attrs, children...)
+}
+
+func FormTag(attrs string, children ...Dom) Dom {
+	return Tag("form", attrs, children...)
+}
+
+func SpanTag(attrs string, children ...Dom) Dom {
+	return Tag("span", attrs, children...)
+}
+
+func InputTag(attrs string, children ...Dom) Dom {
+	return Tag("input", attrs, children...)
+}
+
+func UlTag(attrs string, children ...Dom) Dom {
+	return Tag("ul", attrs, children...)
+}
+
+func LiTag(attrs string, children ...Dom) Dom {
+	return Tag("li", attrs, children...)
+}
+
+func ITag(attrs string, children ...Dom) Dom {
+	return Tag("i", attrs, children...)
 }
