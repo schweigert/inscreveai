@@ -3,12 +3,12 @@ package home_controller
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/schweigert/inscreveai/login"
+	"github.com/schweigert/inscreveai/model"
 	"golang.org/x/oauth2"
 )
 
@@ -27,20 +27,23 @@ func AuthHandler(c *gin.Context) {
 	}
 
 	client := login.GoogleConfig.Client(oauth2.NoContext, tok)
-	userInfo, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
+	userdata, err := client.Get("https://www.googleapis.com/oauth2/v3/userinfo")
 
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 		return
 	}
 
-	defer userInfo.Body.Close()
+	defer userdata.Body.Close()
 
-	data, err := ioutil.ReadAll(userInfo.Body)
+	data, err := ioutil.ReadAll(userdata.Body)
 	if err != nil {
 		c.AbortWithError(http.StatusBadRequest, err)
 	}
 
-	log.Println("Email body: ", string(data))
-	c.Status(http.StatusOK)
+	userInfo := model.UserInfoFromJson(data)
+
+	userInfo.FindOrCreate()
+	userInfo.Auth(c)
+	c.Redirect(http.StatusPermanentRedirect, "/")
 }

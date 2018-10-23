@@ -9,6 +9,8 @@ RUN go get github.com/gin-gonic/contrib/static
 RUN go get github.com/gorilla/context
 RUN go get github.com/boj/redistore
 RUN go get github.com/gorilla/sessions
+RUN go get github.com/jinzhu/gorm
+RUN go get github.com/lib/pq
 
 # Add local volume
 ADD . /go/src/github.com/schweigert/inscreveai
