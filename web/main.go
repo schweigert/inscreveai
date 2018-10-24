@@ -29,6 +29,7 @@ func main() {
 	r.GET("/", home_controller.IndexHandler)
 	r.GET("/auth", home_controller.AuthHandler)
 	r.POST("/event", event_controller.CreateHandler)
+	r.DELETE("/event/:id", event_controller.DeleteHandler)
 
 	r.Run("0.0.0.0:3000")
 }

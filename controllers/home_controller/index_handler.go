@@ -11,5 +11,6 @@ import (
 func IndexHandler(c *gin.Context) {
 	user := model.UserInfoFromSession(c)
 	isAuth := user.IsAuth(c)
-	c.Data(http.StatusOK, "text/html; charset=utf-8", home_view.Index(isAuth, user, c))
+	events := model.AllEventsCards()
+	c.Data(http.StatusOK, "text/html; charset=utf-8", home_view.Index(isAuth, user, events, c))
 }

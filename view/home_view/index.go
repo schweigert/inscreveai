@@ -7,7 +7,7 @@ import (
 	"github.com/schweigert/inscreveai/view/layouts"
 )
 
-func Index(isAuth bool, currentUser *model.UserInfo, c *gin.Context) []byte {
+func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, c *gin.Context) []byte {
 	return layouts.Navbar(
 		isAuth, currentUser, c,
 		func() html.Dom {
@@ -62,7 +62,7 @@ func Index(isAuth bool, currentUser *model.UserInfo, c *gin.Context) []byte {
 				),
 				html.DivTag(
 					`class="row"`,
-					model.AllEventsCards()...,
+					events...,
 				),
 			)
 		},

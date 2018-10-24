@@ -9,6 +9,11 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - TZ=GMT
+  pgadmin4:
+    image: thajeztah/pgadmin4
+    container_name: pgadmin4
+    ports:
+      - "5050:5050"
   web:
     build: .
     command: web

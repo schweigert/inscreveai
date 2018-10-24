@@ -14,14 +14,19 @@ type Event struct {
 
 func (event *Event) Card() html.Dom {
 	return html.DivTag(
-		`class="col-sm-6"`,
+		`class="col-sm-6 mt-3"`,
 		html.DivTag(
 			`class="card"`,
 			html.DivTag(
 				`class="card-body"`,
 				html.PTag(
-					`card-text`,
-					html.Text(event.Description),
+					`class="card-text"`,
+					html.Text("<strong>Nome:</strong>"),
+					html.SafeText(event.Name),
+					html.Text("<br>"),
+					html.Text("<strong>Descrição:</strong>"),
+					html.SafeText(event.Description),
+					html.Text("<br>"),
 				),
 			),
 		),
@@ -32,7 +37,7 @@ func AllEventsCards() []html.Dom {
 	list := []html.Dom{}
 	events := []Event{}
 	db := Db()
-	db.Close()
+	defer db.Close()
 
 	db.Find(&events)
 
