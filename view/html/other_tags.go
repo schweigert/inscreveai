@@ -75,3 +75,7 @@ func LiTag(attrs string, children ...Dom) Dom {
 func ITag(attrs string, children ...Dom) Dom {
 	return Tag("i", attrs, children...)
 }
+
+func HTag(level, attrs string, children ...Dom) Dom {
+	return Tag("h"+level, attrs, children...)
+}

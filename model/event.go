@@ -33,13 +33,17 @@ func (event *Event) Card() html.Dom {
 	)
 }
 
-func AllEventsCards() []html.Dom {
+func AllEventsCards(query string) []html.Dom {
 	list := []html.Dom{}
 	events := []Event{}
 	db := Db()
 	defer db.Close()
 
-	db.Find(&events)
+	if query != "" {
+		db.Where("name = ? OR description = ?", query, query).Find(&events)
+	} else {
+		db.Find(&events)
+	}
 
 	for _, el := range events {
 		list = append(list, el.Card())

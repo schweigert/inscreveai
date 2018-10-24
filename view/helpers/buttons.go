@@ -20,7 +20,7 @@ func GoogleOAuthState(c *gin.Context) string {
 }
 
 func AuthButton(isAuth bool, currentUser *model.UserInfo, c *gin.Context) html.Dom {
-	return html.If(
+	return html.IfElse(
 		isAuth,
 		html.ATag(
 			fmt.Sprintf(`class="btn btn-outline-warning ml-2 my-sm-0" href="%s"`, login.GoogleLoginURL(GoogleOAuthState(c))),
