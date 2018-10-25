@@ -77,29 +77,36 @@ func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, adminEve
 						),
 					),
 				),
-				html.DivTag(
-					`class="row"`,
-					html.HTag(
-						`1`,
-						``,
-						html.Text("Seus eventos"),
+				html.If(
+					isAuth,
+					html.Append(
+						html.DivTag(
+							`class="row"`,
+							html.HTag(
+								`1`,
+								``,
+								html.Text("Seus eventos"),
+							),
+						),
+						html.DivTag(
+							`class="row"`,
+							adminEvents...,
+						),
 					),
 				),
-				html.DivTag(
-					`class="row"`,
-					adminEvents...,
-				),
-				html.DivTag(
-					`class="row"`,
-					html.HTag(
-						`1`,
-						``,
-						html.Text("Eventos disponíveis"),
+				html.Append(
+					html.DivTag(
+						`class="row"`,
+						html.HTag(
+							`1`,
+							``,
+							html.Text("Eventos disponíveis"),
+						),
 					),
-				),
-				html.DivTag(
-					`class="row"`,
-					events...,
+					html.DivTag(
+						`class="row"`,
+						events...,
+					),
 				),
 			)
 		},
