@@ -17,7 +17,7 @@ func CreateHandler(c *gin.Context) {
 		db := model.Db()
 		defer db.Close()
 
-		db.Create(&model.Event{Description: description, Name: name, UserInfoId: user.ID})
+		db.Create(&model.Event{Description: description, Name: name, UserInfoID: user.ID})
 	}
 
 	c.Redirect(http.StatusFound, "/")

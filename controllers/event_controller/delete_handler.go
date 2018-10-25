@@ -18,7 +18,7 @@ func DeleteHandler(c *gin.Context) {
 		id := c.Param("id")
 		db.First(event, id)
 
-		if event.UserInfoId == user.ID {
+		if event.UserInfoID == user.ID {
 			db.Delete(event)
 		}
 	}

@@ -15,6 +15,7 @@ func migrate() {
 	db.AutoMigrate(
 		&model.UserInfo{},
 		&model.Event{},
+		&model.Event{},
 	)
 }
 

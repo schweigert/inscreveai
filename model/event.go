@@ -11,7 +11,7 @@ type Event struct {
 	gorm.Model
 	Description string `json:"description"`
 	Name        string `json:"name"`
-	UserInfoId  uint
+	UserInfoID  uint
 }
 
 func (event *Event) AdminCard() html.Dom {
