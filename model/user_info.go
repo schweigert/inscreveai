@@ -73,7 +73,7 @@ func UserInfoFromSession(c *gin.Context) *UserInfo {
 		hash := session.Get("auth_token_hash")
 
 		userInfo := &UserInfo{Email: ""}
-		db.Where("sub = ? AND email = ?", sub, email).Preload("Subscriptions").First(userInfo)
+		db.Where("sub = ? AND email = ?", sub, email).Preload("Subscriptions").Preload("Events").First(userInfo)
 
 		if userInfo.Hash() == hash {
 			return userInfo
