@@ -2,8 +2,6 @@ package html
 
 import (
 	"fmt"
-	"log"
-	"regexp"
 )
 
 type textDom struct {
@@ -19,11 +17,7 @@ func (dom *textDom) HtmlSafe() string {
 }
 
 func SafeText(element string) Dom {
-	reg, err := regexp.Compile("[^a-zA-Z0-9 ]+")
-	if err != nil {
-		log.Fatal(err)
-	}
-	processedString := reg.ReplaceAllString(element, " ")
+	processedString := textReg.ReplaceAllString(element, " ")
 
 	return Text(processedString)
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/schweigert/inscreveai/view/layouts"
 )
 
-func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, c *gin.Context) []byte {
+func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, adminEvents []html.Dom, c *gin.Context) []byte {
 	return layouts.Navbar(
 		isAuth, currentUser, c,
 		func() html.Dom {
@@ -32,7 +32,11 @@ func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, c *gin.C
 									`class="card"`,
 									html.DivTag(
 										`class="card-header text-center"`,
-										html.Text("Crie o evento dos teus sonhos!"),
+										html.StrongTag(
+											``,
+											html.SafeText(currentUser.GivenName),
+											html.Text(", você pode criar o seu evento!"),
+										),
 									),
 									html.DivTag(
 										`class="card-body"`,
@@ -54,8 +58,8 @@ func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, c *gin.C
 													`for="description"`,
 													html.Text("Descrição:"),
 												),
-												html.InputTag(
-													`id="description" name="description" type="text" class="form-control" placeholder="Uma descrição atrativa!"`,
+												html.TextAreaTag(
+													`id="description" name="description" type="textarea" class="form-control" placeholder="Uma descrição atrativa!"`,
 												),
 											),
 											html.DivTag(
@@ -72,6 +76,18 @@ func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, c *gin.C
 							),
 						),
 					),
+				),
+				html.DivTag(
+					`class="row"`,
+					html.HTag(
+						`1`,
+						``,
+						html.Text("Seus eventos"),
+					),
+				),
+				html.DivTag(
+					`class="row"`,
+					adminEvents...,
 				),
 				html.DivTag(
 					`class="row"`,

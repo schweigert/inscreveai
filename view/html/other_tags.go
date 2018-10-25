@@ -16,6 +16,10 @@ func TitleTag(attrs string, children ...Dom) Dom {
 	return Tag("title", attrs, children...)
 }
 
+func StrongTag(attrs string, children ...Dom) Dom {
+	return Tag("strong", attrs, children...)
+}
+
 func PTag(attrs string, children ...Dom) Dom {
 	return Tag("p", attrs, children...)
 }
@@ -62,6 +66,10 @@ func SpanTag(attrs string, children ...Dom) Dom {
 
 func InputTag(attrs string, children ...Dom) Dom {
 	return Tag("input", attrs, children...)
+}
+
+func TextAreaTag(attrs string, children ...Dom) Dom {
+	return Tag("textarea", attrs, children...)
 }
 
 func UlTag(attrs string, children ...Dom) Dom {
