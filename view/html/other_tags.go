@@ -12,6 +12,10 @@ func BodyTag(attrs string, children ...Dom) Dom {
 	return Tag("body", attrs, children...)
 }
 
+func ImgTag(attrs string, children ...Dom) Dom {
+	return Tag("img", attrs, children...)
+}
+
 func TitleTag(attrs string, children ...Dom) Dom {
 	return Tag("title", attrs, children...)
 }

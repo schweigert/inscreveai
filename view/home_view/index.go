@@ -94,6 +94,23 @@ func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, adminEve
 						),
 					),
 				),
+				html.If(
+					isAuth,
+					html.Append(
+						html.DivTag(
+							`class="row"`,
+							html.HTag(
+								`1`,
+								``,
+								html.Text("Suas inscrições"),
+							),
+						),
+						html.DivTag(
+							`class="row"`,
+							model.PenddingSubscriptionCards(currentUser.Subscriptions)...,
+						),
+					),
+				),
 				html.Append(
 					html.DivTag(
 						`class="row"`,

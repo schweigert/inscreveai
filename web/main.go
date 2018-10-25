@@ -15,7 +15,7 @@ func migrate() {
 	db.AutoMigrate(
 		&model.UserInfo{},
 		&model.Event{},
-		&model.Event{},
+		&model.Subscription{},
 	)
 }
 
@@ -31,6 +31,6 @@ func main() {
 	r.GET("/auth", home_controller.AuthHandler)
 	r.POST("/event", event_controller.CreateHandler)
 	r.POST("/event/:id/delete", event_controller.DeleteHandler)
-
+	r.POST("/event/:id/subscribe", event_controller.SubscribeHandler)
 	r.Run("0.0.0.0:3000")
 }

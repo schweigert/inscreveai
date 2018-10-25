@@ -23,6 +23,7 @@ type UserInfo struct {
 	Locale        string `json:"locale"`
 	Hd            string `json:"hd"`
 	Events        []Event
+	Subscriptions []Subscription
 }
 
 func (userInfo *UserInfo) Auth(c *gin.Context) {
@@ -72,7 +73,7 @@ func UserInfoFromSession(c *gin.Context) *UserInfo {
 		hash := session.Get("auth_token_hash")
 
 		userInfo := &UserInfo{Email: ""}
-		db.Where("sub = ? AND email = ?", sub, email).First(userInfo)
+		db.Where("sub = ? AND email = ?", sub, email).Preload("Subscriptions").First(userInfo)
 
 		if userInfo.Hash() == hash {
 			return userInfo

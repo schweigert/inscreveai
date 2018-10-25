@@ -9,9 +9,10 @@ import (
 
 type Event struct {
 	gorm.Model
-	Description string `json:"description"`
-	Name        string `json:"name"`
-	UserInfoID  uint
+	Description   string `json:"description"`
+	Name          string `json:"name"`
+	UserInfoID    uint
+	Subscriptions []Subscription
 }
 
 func (event *Event) AdminCard() html.Dom {
@@ -28,6 +29,10 @@ func (event *Event) AdminCard() html.Dom {
 			),
 			html.DivTag(
 				`class="card-body"`,
+				html.DivTag(
+					`class="row"`,
+					SubscriptionAdminList(event.Subscriptions)...,
+				),
 				html.FormTag(
 					`action="/event/`+strconv.Itoa(int(event.ID))+`/delete" method="POST"`,
 					html.DivTag(
@@ -62,9 +67,29 @@ func (event *Event) Card() html.Dom {
 					`class="card-text"`,
 					html.SafeText(event.Description),
 				),
+				html.FormTag(
+					`action="/event/`+strconv.Itoa(int(event.ID))+`/subscribe" method="POST"`,
+					html.DivTag(
+						`class="text-center mt-3 mb-3"`,
+						html.ButtonTag(
+							`class="btn btn-outline-danger" type="submit"`,
+							html.ITag(`class="fas fa-check"`),
+							html.Text("inscrever-se"),
+						),
+					),
+				),
 			),
 		),
 	)
+}
+
+func SubscriptionAdminList(subs []Subscription) []html.Dom {
+	ret := []html.Dom{}
+
+	for _, sub := range subs {
+		ret = append(ret, sub.AdminRow())
+	}
+	return ret
 }
 
 func AllAdminCards(user *UserInfo) []html.Dom {
@@ -73,7 +98,7 @@ func AllAdminCards(user *UserInfo) []html.Dom {
 	db := Db()
 	defer db.Close()
 
-	db.Where("user_info_id = ?", user.ID).Find(&events)
+	db.Where("user_info_id = ?", user.ID).Preload("Subscriptions").Find(&events)
 
 	for _, el := range events {
 		list = append(list, el.AdminCard())
