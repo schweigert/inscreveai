@@ -30,7 +30,7 @@ func GoogleOAuth2Config() *oauth2.Config {
 	config := &oauth2.Config{
 		ClientID:     credentials.Cid,
 		ClientSecret: credentials.Csecret,
-		RedirectURL:  "http://localhost:3000/auth",
+		RedirectURL:  "http://c380e28f.ngrok.io/auth",
 		Scopes: []string{
 			"https://www.googleapis.com/auth/userinfo.email", // You have to select your own scope from here -> https://developers.google.com/identity/protocols/googlescopes#google_sign-in
 			"https://www.googleapis.com/auth/userinfo.profile",
