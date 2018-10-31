@@ -12,7 +12,7 @@ func Index(isAuth bool, currentUser *model.UserInfo, events []html.Dom, adminEve
 		isAuth, currentUser, c,
 		func() html.Dom {
 			return html.DivTag(
-				`class="container mt-5"`,
+				`class="container p-5" style="background-color: RGBA(255,255,255,0.8)"`,
 				html.If(
 					isAuth,
 					html.Append(
