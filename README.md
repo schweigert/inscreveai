@@ -32,3 +32,6 @@ make build
 ```
 make run
 ```
+
+# Documentation
+The documentation about this project it's available on `Documentação.pdf`
