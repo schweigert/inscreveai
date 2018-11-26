@@ -94,7 +94,7 @@ func (sub *Subscription) PenddingCard() html.Dom {
 			html.DivTag(
 				`class="card-body"`,
 				html.Text("Você está esperando a aprovação desde: "),
-				html.Text(sub.CreatedAt),
+				html.Text(sub.CreatedAt.Format("02/01/2006")),
 			),
 		),
 	)
@@ -119,7 +119,7 @@ func (sub *Subscription) ConfirmedCard() html.Dom {
 			html.DivTag(
 				`class="card-body"`,
 				html.Text("Confirmado em: "),
-				html.Text(sub.UpdatedAt),
+				html.Text(sub.UpdatedAt.Format("02/01/2006")),
 			),
 		),
 	)
@@ -144,7 +144,7 @@ func (sub *Subscription) RefusedCard() html.Dom {
 			html.DivTag(
 				`class="card-body"`,
 				html.Text("Cancelado em: "),
-				html.Text(sub.UpdatedAt),
+				html.Text(sub.UpdatedAt.Format("02/01/2006")),
 			),
 		),
 	)
